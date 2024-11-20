@@ -1,0 +1,27 @@
+{
+    "environment": "uat",
+    "project_id": "your-uat-project-id",
+    "region": "us-east1",
+    "terraform_backend": {
+      "bucket": "uat-terraform-state-bucket",
+      "prefix": "terraform/state/uat"
+    },
+    "database": {
+      "name": "uat-database",
+      "instance": "uat-db-instance"
+    },
+    "network": {
+      "vpc_name": "uat-vpc",
+      "subnet": "uat-subnet",
+      "region": "us-east1"
+    },
+    "services": {
+      "app_service_name": "uat-app-service",
+      "load_balancer_name": "uat-load-balancer"
+    },
+    "logging": {
+      "log_level": "info",
+      "log_bucket": "uat-log-bucket"
+    }
+  }
+  

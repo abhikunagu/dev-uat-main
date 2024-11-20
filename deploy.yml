@@ -1,0 +1,60 @@
+name: GCP Deployment Workflow
+
+on:
+  push:
+    branches:
+      - dev
+      - uat
+      - main
+  pull_request:
+    branches:
+      - dev
+      - uat
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to GCP
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set Up Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      # Step 3: Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+
+      # Step 4: Validate Terraform Configuration
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Step 5: Create Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+
+      # Step 6: Deploy to Dev
+      - name: Terraform Apply for Dev
+        if: github.ref == 'refs/heads/dev'
+        run: terraform apply -auto-approve tfplan
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+
+      # Step 7: Deploy to UAT
+      - name: Terraform Apply for UAT
+        if:

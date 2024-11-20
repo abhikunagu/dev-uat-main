@@ -1,0 +1,27 @@
+{
+    "environment": "dev",
+    "project_id": "your-dev-project-id",
+    "region": "us-central1",
+    "terraform_backend": {
+      "bucket": "dev-terraform-state-bucket",
+      "prefix": "terraform/state/dev"
+    },
+    "database": {
+      "name": "dev-database",
+      "instance": "dev-db-instance"
+    },
+    "network": {
+      "vpc_name": "dev-vpc",
+      "subnet": "dev-subnet",
+      "region": "us-central1"
+    },
+    "services": {
+      "app_service_name": "dev-app-service",
+      "load_balancer_name": "dev-load-balancer"
+    },
+    "logging": {
+      "log_level": "debug",
+      "log_bucket": "dev-log-bucket"
+    }
+  }
+  

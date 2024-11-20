@@ -1,0 +1,37 @@
+{
+    "environment": "prod",
+    "project_id": "your-prod-project-id",
+    "region": "us-west1",
+    "terraform_backend": {
+      "bucket": "prod-terraform-state-bucket",
+      "prefix": "terraform/state/prod"
+    },
+    "database": {
+      "name": "prod-database",
+      "instance": "prod-db-instance"
+    },
+    "network": {
+      "vpc_name": "prod-vpc",
+      "subnet": "prod-subnet",
+      "region": "us-west1"
+    },
+    "services": {
+      "app_service_name": "prod-app-service",
+      "load_balancer_name": "prod-load-balancer"
+    },
+    "logging": {
+      "log_level": "error",
+      "log_bucket": "prod-log-bucket"
+    },
+    "security": {
+      "enable_ssl": true,
+      "firewall_rules": [
+        {
+          "name": "allow-https",
+          "protocol": "tcp",
+          "ports": ["443"]
+        },
+        {
+          "name": "allow-http",
+          "protocol": "t
+  

@@ -1,0 +1,23 @@
+
+---
+
+### **10. `.gitignore` (Git Ignore File)**
+
+```gitignore
+# Node modules
+node_modules/
+
+# Build artifacts
+dist/
+
+# Environment files
+.env
+*.env
+
+# Logs
+logs/
+*.log
+
+# Terraform state
+terraform.tfstate
+terraform.tfstate.backup
